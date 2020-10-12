@@ -1,0 +1,33 @@
+name: projetSD
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - bokeh=2.0
+  - bs4
+  - dask
+  - dask-ml
+  - h5py
+  - ipykernel
+  - ipywidgets
+  - jupytext
+  - lxml
+  - matplotlib
+  - nomkl
+  - numba
+  - numpy
+  - pandas
+  - pip
+  - pip:
+    - dask_labextension
+    - mimesis
+  - pyarrow
+  - pytables
+  - python-graphviz
+  - requests
+  - scikit-learn
+  - seaborn
+  - tornado
+  - tqdm
+  - xarray
+
