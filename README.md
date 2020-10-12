@@ -33,6 +33,7 @@ Projet de Science des Données - M2 MAS
     * Découpage par :
         * `mots`
         * `phrase`
+	(Aspect multi-echelle?)
     * Word-Embeeding :
         * Word2Vec
         * [Fairness in Word-Embeding](https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html)
