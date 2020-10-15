@@ -23,21 +23,21 @@ names = pd.read_csv('./data/categories_string.csv')['0'].to_dict()
 data=Import(fileName='./data/train',fileExtension='json').set_index('Id')
 train_label=pd.read_csv('./data/train_label.csv',index_col='Id')
 
+data_test=Import(fileName='./data/test',fileExtension='json').set_index('Id')
+# X_train=data["description"].apply(deleteStopWords)
+# Y_train=train_label
 
-X_train=data["description"].apply(deleteStopWords)
-Y_train=train_label
+# DF= X_train.map(names)
 
-DF= X_train.map(names)
+# model = pipeline.make_pipeline(
+#     feature_extraction.text.TfidfVectorizer(),
+#     preprocessing.Normalizer(),
+#     linear_model.LogisticRegression(multi_class='multinomial')
+# )
 
-model = pipeline.make_pipeline(
-    feature_extraction.text.TfidfVectorizer(),
-    preprocessing.Normalizer(),
-    linear_model.LogisticRegression(multi_class='multinomial')
-)
+# model = model.fit(X_train, Y_train)
 
-model = model.fit(X_train, Y_train)
-
-y_pred = model.predict(X_test)
+# y_pred = model.predict(X_test)
 # y_pred = pd.Series(y_pred, name='job', index=X_test.index)
 
 # print(metrics.f1_score(y_test, y_pred, average='macro'))

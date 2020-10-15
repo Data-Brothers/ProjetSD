@@ -21,9 +21,9 @@ def KaggleSubmit(fileName,Msg):
     
     Returns: 0 (Everything runned well)
     """
-    cmdSubmit="kaggle competitions submit -c defi-ia-insa-toulouse -f {fName} -m '{Msg}'".format(Msg=Msg,fName=fileName)
+    cmdSubmit=f"kaggle competitions submit -c defi-ia-insa-toulouse -f {fName} -m '{Msg}'".format(Msg=Msg,fName=fileName)
     os.system(cmdSubmit)
-    cmdLeaderBoard='kaggle competitions leaderboard -c defi-ia-insa-toulouse --show'
+    cmdLeaderBoard=x'kaggle competitions leaderboard -c defi-ia-insa-toulouse --show'
     os.system(cmdLeaderBoard)    
     return 0
 
