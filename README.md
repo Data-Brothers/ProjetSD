@@ -16,7 +16,7 @@ Projet de Science des Données - M2 MAS
 3. Amuse-toi ! 
 
 ### Installation de Nouveau Packages
-1. `conda env create -f ProjetSdEnv.yml`
+1. `conda env export > ProjetSdEnv.yml`
 2. `git add .`
 3. `git commit -m "Adding pkg"`
 4. `git push`
