@@ -8,6 +8,7 @@ Projet de Science des Données - M2 MAS
 2. `conda create -y -n ProjetSD python=3.8`
 3. `conda activate ProjetSD`
 4. `conda env update -f ProjetSdEnv.yml -n ProjetSD`
+5. `conda run -n ProjetSD python -m ipykernel install --user --name ProjetSD`
 
 ### Utilisation standard
 1. `conda activate ProjetSD`
