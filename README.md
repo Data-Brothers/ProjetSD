@@ -1,6 +1,21 @@
 # ProjetSD
 Projet de Science des Données - M2 MAS
 
+## Structure du Projet :
+
+* `data` : dossier avec les données du projet
+* `Dask_MacroDI.ipynb` : Notebook calcul de l'indicateur de Fairness (OK)
+* `manipData` : Fonctions d'importation (HS)
+* `multiclass-text-classification-with-spacy-dask.ipynb`: Notebook d'internet pour faire des tests (HS)
+* `PierreLep.py` : Script de Pierre pour faire ces tests (HS)
+* ProjetSdEnv.yml : Configuration de l'environement conda. (OK)
+
+* `TD3_LEPAGNOL.ipynb` : NoteBook TD3 Text Minning Pierre pour recupération de RegEx (OK)
+* `README.md` : Fichier de présentation (OK)
+
+
+Tout les fichiers `(OK)` sont utilisables et stable (sans bugs) tout les fichiers `(HS)` sont non utilisables.
+
 ---
 ## S'approprier le projet : 
 ### Nouvelle Utilisation :
