@@ -12,6 +12,9 @@ import os
 import re
 import pandas as pd
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+from sklearn.metrics import f1_score
+from datetime import datetime
+import csv
 
 def KaggleSubmit(fileName,Msg):
     """  Soumission sur kaggle\n
@@ -23,7 +26,7 @@ def KaggleSubmit(fileName,Msg):
     """
     cmdSubmit=f"kaggle competitions submit -c defi-ia-insa-toulouse -f {fName} -m '{Msg}'".format(Msg=Msg,fName=fileName)
     os.system(cmdSubmit)
-    cmdLeaderBoard=x'kaggle competitions leaderboard -c defi-ia-insa-toulouse --show'
+    cmdLeaderBoard='kaggle competitions leaderboard -c defi-ia-insa-toulouse --show'
     os.system(cmdLeaderBoard)    
     return 0
 
@@ -86,3 +89,29 @@ def macro_disparate_impact(people):
 
 def macro_f1(y_true, y_pred):
     return f1_score(y_true, y_pred, average='macro')
+
+def HistoriqueCsv(nom, preparation, modele, validation, f1score, fairness):
+    '''
+    Parameters
+    ----------
+    nom : str
+        Ton nom.
+    preparation : str
+        Méthode de préparation de text utilisé.
+    modele : str
+        Modèle utilisé (obliez pas les parametres).
+    validation : str
+        Validation effectuée (hold-out, VC...).
+    f1score : float
+        macro f1-score.
+    fairness : float
+        macro_disparate_impact.
+    -------
+    Ecrit le résultat d'un modèle dans le fichier Historique_resultats, 
+    pour pouvoir garder une trace des modèles testés.
+
+    '''
+    jour = datetime.today()
+    with open('Historique_resultats.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=';')
+        writer.writerow([jour, nom, preparation, modele, validation, f1score, fairness])
