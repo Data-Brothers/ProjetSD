@@ -68,27 +68,27 @@ resume.plot(kind='barh',y='femmes',x='label',color='r')
 
 post1 = data.description[1]
 print(post1)
-post1 = deleteStopWords(post1)
-print(post1)
-post1 = cleanText(post1)
-print(post1)
+# post1 = deleteStopWords(post1)
+# print(post1)
+# post1 = cleanText(post1)
+# print(post1)
 
-words = post1.lower().split()
-
-
-stemmer = PorterStemmer()
-wordStem = []
-for word in words :
-    wordStem.append(stemmer.stem(word))
+# words = post1.lower().split()
 
 
+# stemmer = PorterStemmer()
+# wordStem = []
+# for word in words :
+#     wordStem.append(stemmer.stem(word))
 
 
-dataset = []
-doc = defaultdict(int)
-for word in wordStem : 
-    doc[word] +=1
-dataset.append(doc)
+
+
+# dataset = []
+# doc = defaultdict(int)
+# for word in wordStem : 
+#     doc[word] +=1
+# dataset.append(doc)
     
 @dask.delayed
 def wordFreq(doc):
@@ -102,11 +102,30 @@ def wordFreq(doc):
     valMax = max(doc_corr.values())
     return {k:v/valMax for k,v in doc_corr.items()}
 
+print(wordFreq(data.description[1]).compute())
+
+%%time
+tasks = [wordFreq(data.description[i]) for i in range(10000)]
+list_df = dask.compute(*tasks)
+#data_train = DataFrame(list_df)
+
+
+def wordFreq(doc):
+    post = cleanText(deleteStopWords(doc))
+    words = post.lower().split()
+    stemmer = PorterStemmer()
+    wordStem = [stemmer.stem(word) for word in words]
+    doc_corr = defaultdict(int)
+    for word in wordStem : 
+        doc_corr[word] +=1
+    valMax = max(doc_corr.values())
+    return {k:v/valMax for k,v in doc_corr.items()}
+
 print(wordFreq(data.description[1]))
 
-L = [wordFreq(data.description[i]).compute() for i in range(len(data))]
-data_train = DataFrame(L)
-
+%%time
+L = [wordFreq(data.description[i]) for i in range(10000)]
+#data_train = DataFrame(L)
 
 
 

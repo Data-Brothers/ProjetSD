@@ -26,6 +26,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 #%% fonction
 '''
@@ -88,17 +89,18 @@ trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=
 
 #%% modele
 
-LDA=LinearDiscriminantAnalysis()
-NAIVEBAYES=MultinomialNB()
-ada=AdaBoostClassifier(n_estimators=100)
+# clf=LinearDiscriminantAnalysis()
+# clf=MultinomialNB()
+# clf=AdaBoostClassifier(n_estimators=100)
 
-gbm=GradientBoostingClassifier(n_estimators=10)
+# clf=GradientBoostingClassifier(n_estimators=10)
 
-sgd= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
+# clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
+clf = RandomForestClassifier(n_jobs=4)
 
 text_clf = Pipeline([
-    ('tfidf', TfidfVectorizer(ngram_range=(1,3))),
-    ('clf',sgd),
+    ('tfidf', TfidfVectorizer()),
+    ('clf',clf),
 ])
 
 #%% séparetion train/test
@@ -112,7 +114,7 @@ XValidSet= validSet.loc[:,validSet.columns!='Y']
 
 
 YTrainSet= trainSet['Y']
-#.loc[:,trainSet.columns!='Y']
+
 YValidSet= validSet['Y']
 
 #%% entrainement
@@ -131,7 +133,7 @@ fairness = macro_disparate_impact(test_people)
 print(f'Fairness = {fairness:.5}')
 
 #%% Exportation
-HistoriqueCsv('Marc', 'prepareTxt, TfidfVectorizer(ngram_range=(1,3))',
-                'SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)', 
-                'Hold-out, test_size=0.3', 0.70057, 3.482)
+HistoriqueCsv('Marc', 'prepareTxt, TfidfVectorizer()',
+                'RandomForest', 
+                'Hold-out, test_size=0.3', Macrof1, fairness)
 
