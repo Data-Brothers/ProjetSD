@@ -5,6 +5,7 @@ Projet de Science des Données - M2 MAS
 
 ## Structure du Projet :
 
+```
 ├── data `Dossier des fichiers`
 │   ├── categories_string.csv
 │   ├── template_submissions.csv
@@ -30,6 +31,7 @@ Projet de Science des Données - M2 MAS
 │   └── txt_prep.py `Preparation des chaînes de charactères`
 ├── ProjetSdEnv.yml
 └── README.md
+```
 
 Tout les fichiers `(OK)` sont utilisables et stable (sans bugs) tout les fichiers `(HS)` sont non utilisables.
 
