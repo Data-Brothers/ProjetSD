@@ -22,7 +22,9 @@ from collections  import defaultdict
 import dask
 import dask.multiprocessing
 from dask import delayed
+import dask.dataframe as dd
 import matplotlib.pyplot as plt
+import string
 
 
 
@@ -102,35 +104,35 @@ def wordFreq(doc):
     valMax = max(doc_corr.values())
     return {k:v/valMax for k,v in doc_corr.items()}
 
-print(wordFreq(data.description[1]).compute())
-
-%%time
-tasks = [wordFreq(data.description[i]) for i in range(10000)]
-list_df = dask.compute(*tasks)
-#data_train = DataFrame(list_df)
-
-
-def wordFreq(doc):
-    post = cleanText(deleteStopWords(doc))
-    words = post.lower().split()
-    stemmer = PorterStemmer()
-    wordStem = [stemmer.stem(word) for word in words]
-    doc_corr = defaultdict(int)
-    for word in wordStem : 
-        doc_corr[word] +=1
-    valMax = max(doc_corr.values())
-    return {k:v/valMax for k,v in doc_corr.items()}
-
 print(wordFreq(data.description[1]))
+
+
+# tasks = [delayed(wordFreq(data.description[i])) for i in range(10000)]
+# list_df = tasks.compute()
+# tasks.visualize()
+#dask.compute(*tasks)
+#data_train = DataFrame(list_df)
 
 %%time
 L = [wordFreq(data.description[i]) for i in range(10000)]
-#data_train = DataFrame(L)
+
+%%time
+train = DataFrame(L)
+
+L = [wordFreq(data.description[i]) for i in range(10000)]
+train = dd.from_delayed()
 
 
 
 
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
+doc = nlp(post1)
+doc
+
+lemma = " ".join([token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop]
+lemma
 
 
 
