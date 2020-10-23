@@ -1,7 +1,6 @@
 # ProjetSD
 Projet de Science des Données - M2 MAS
-
-
+Slides / Présentation : ![Lien Overleaf - LateX](https://www.overleaf.com/project/5f9199e2a19ef20001a08ce4)
 
 ## Structure du Projet :
 
