@@ -1,20 +1,39 @@
 # ProjetSD
 Projet de Science des Données - M2 MAS
 
+
+
 ## Structure du Projet :
 
-* `data` : dossier avec les données du projet
-* `Dask_MacroDI.ipynb` : Notebook calcul de l'indicateur de Fairness (OK)
-* `manipData` : Fonctions d'importation (HS)
-* `multiclass-text-classification-with-spacy-dask.ipynb`: Notebook d'internet pour faire des tests (HS)
-* `PierreLep.py` : Script de Pierre pour faire ces tests (HS)
-* ProjetSdEnv.yml : Configuration de l'environement conda. (OK)
-
-* `TD3_LEPAGNOL.ipynb` : NoteBook TD3 Text Minning Pierre pour recupération de RegEx (OK)
-* `README.md` : Fichier de présentation (OK)
-
+├── data `Dossier des fichiers`
+│   ├── categories_string.csv
+│   ├── template_submissions.csv
+│   ├── test.json
+│   ├── train.json
+│   └── train_label.csv
+├── exploration `Scripts & Notebook d'exploration`
+│   ├── Dask_MacroDI.ipynb (OK)
+│   ├── Dask_ML_TextPreprocessing.ipynb (OK)
+│   ├── Gender_words.ipynb (OK)
+│   ├── MarcHersant.py (OK)
+│   ├── multiclass-text-classification-with-spacy-dask.ipynb (HS)
+│   ├── PierreFinal.ipynb (HS)
+│   ├── PierreLep.py (HS)
+│   ├── Prof_reduction.ipynb (OK)
+│   └── PYColson.py (OK)
+├── global.py `fichier maître`
+├── Historique_resultats.csv
+├── __init__.py
+├── ManipData `Scripts de Manipulation des données`
+│   ├── __init__.py
+│   ├── IO_Kaggle.py `Input/Output & Soumission Kaggle`
+│   └── txt_prep.py `Preparation des chaînes de charactères`
+├── ProjetSdEnv.yml
+└── README.md
 
 Tout les fichiers `(OK)` sont utilisables et stable (sans bugs) tout les fichiers `(HS)` sont non utilisables.
+
+_Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.com/questions/36321815/how-to-automatically-create-readme-md-markdown-of-directory-tree-listing?answertab=votes#tab-top)
 
 ---
 ## S'approprier le projet : 
@@ -42,6 +61,7 @@ Tout les fichiers `(OK)` sont utilisables et stable (sans bugs) tout les fichier
 * Visualisation des données brutes
 * Préparation de données
 * Création du modèle
+
 
 ---
 ## Idées : 
