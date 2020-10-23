@@ -2,3 +2,4 @@ Date;Nom;Preparation;Modele;Validation;F1Score;Fairness
 2020-10-21 21:23:15.974082;Marc;TfidfVectorizer(ngram_range=(1,3));"SGDClassifier(loss=""modified_huber"", penalty=""l2"",early_stopping=True)";Hold-out, test_size=0.3;0.68862;4.4102
 2020-10-21 21:25:30.284508;Marc;prepareTxt, TfidfVectorizer(ngram_range=(1,3));"SGDClassifier(loss=""modified_huber"", penalty=""l2"",early_stopping=True)";Hold-out, test_size=0.3;0.70057;3.482
 2020-10-22 16:13:38.819757;Marc;prepareTxt, TfidfVectorizer();RandomForest;Hold-out, test_size=0.3;0.6117206397789653;3.9586855839780215
+2020-10-23 13:27:23.233088;PYC;prepareTxtSpacy, TfidfVectorizer();"SGDClassifier(loss=""modified_huber"", penalty=""l2"",early_stopping=True)";Hold-out, test_size=0.3;0.7306476087483812;3.28694614105357
