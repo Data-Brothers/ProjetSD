@@ -92,7 +92,7 @@ print(post1)
 #     doc[word] +=1
 # dataset.append(doc)
     
-@dask.delayed
+
 def wordFreq(doc):
     post = cleanText(deleteStopWords(doc))
     words = post.lower().split()
@@ -114,13 +114,13 @@ print(wordFreq(data.description[1]))
 #data_train = DataFrame(list_df)
 
 %%time
-L = [wordFreq(data.description[i]) for i in range(10000)]
-
-%%time
+L = [wordFreq(data.description[i]) for i in range(5000)]
 train = DataFrame(L)
 
-L = [wordFreq(data.description[i]) for i in range(10000)]
-train = dd.from_delayed()
+%%time
+L = [dask.delayed(wordFreq)(data.description[i]) for i in range(5000)]
+L = dask.compute(L)[0]
+train = DataFrame(L)
 
 
 
@@ -128,15 +128,10 @@ train = dd.from_delayed()
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
-doc = nlp(post1)
-doc
-
-lemma = " ".join([token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop]
-lemma
-
-
-
-
+def prepareTxtSpacy(text):
+    doc = nlp(text.strip())
+    doc_lemma = " ".join([token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop])
+    return doc_lemma
 
 
 

@@ -5,16 +5,11 @@ Created on Fri Oct 23 11:23:51 2020
 
 @author: pierre-yvescolson
 """
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 21 18:50:13 2020
 
-@author: Marc
-"""
 #%% Importation
 
 import os
-from manipData import Import, HistoriqueCsv, macro_disparate_impact
+from manipData import Import, HistoriqueCsv, macro_disparate_impact, prepareTxt, prepareTxtSpacy
 import pandas as pd
 import re
 import nltk
@@ -51,9 +46,11 @@ trainY=pd.read_csv('./data/train_label.csv',index_col='Id')
 trainDF= pd.concat([trainX, trainY], axis=1)
 
 #%% preparation
+# utilisation de la fonction prepareTxt
+#trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
 
-trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
-
+# utilisation de la fonction prepareTxt
+trainDF['description']=trainDF.apply(lambda x:prepareTxtSpacy(x['description']),axis=1)
 
 #%% modele
 
@@ -63,8 +60,8 @@ trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=
 
 # clf=GradientBoostingClassifier(n_estimators=10)
 
-# clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
-clf = RandomForestClassifier(n_jobs=4)
+clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
+#clf = RandomForestClassifier(n_jobs=4)
 
 text_clf = Pipeline([
     ('tfidf', TfidfVectorizer()),
@@ -101,7 +98,7 @@ fairness = macro_disparate_impact(test_people)
 print(f'Fairness = {fairness:.5}')
 
 #%% Exportation
-HistoriqueCsv('Marc', 'prepareTxt, TfidfVectorizer()',
-                'RandomForest', 
+HistoriqueCsv('PYC', 'prepareTxtSpacy, TfidfVectorizer()',
+                'SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)', 
                 'Hold-out, test_size=0.3', Macrof1, fairness)
 
