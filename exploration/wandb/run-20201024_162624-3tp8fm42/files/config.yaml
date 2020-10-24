@@ -1,0 +1,22 @@
+wandb_version: 1
+
+Validation:
+  desc: null
+  value: Hold-out, test_size=0.3
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.8
+    framework: sklearn
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.7.9
+modele:
+  desc: null
+  value: SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
+preparation:
+  desc: null
+  value: prepareTxt
+transformation:
+  desc: null
+  value: CountVectorizer(ngram_range=(1,3))

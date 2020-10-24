@@ -1,0 +1,24 @@
+{
+    "os": "Windows-10-10.0.18362-SP0",
+    "python": "3.7.9",
+    "heartbeatAt": "2020-10-24T14:05:45.393976",
+    "startedAt": "2020-10-24T14:05:40.667003",
+    "docker": null,
+    "gpu": "GeForce GTX 1060 6GB",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "codePath": "exploration\\MarcHersant.py",
+    "program": "C:\\Users\\Marc\\Documents\\GitHub\\ProjetSD\\exploration\\MarcHersant.py",
+    "git": {
+        "remote": "https://github.com/Data-Brothers/ProjetSD.git",
+        "commit": "9d040300742a6ec6b0f53ff876f81c79eeeec112"
+    },
+    "email": "63056864+Hersant-marc@users.noreply.github.com",
+    "root": "C:/Users/Marc/Documents/GitHub/ProjetSD",
+    "host": "DESKTOP-FOH0742",
+    "username": "Marc",
+    "executable": "C:\\Users\\Marc\\miniconda3\\envs\\ProjetSD\\python.exe"
+}
