@@ -30,12 +30,13 @@ import string
 
 
 # Nom des jobs
-names = pd.read_csv('./data/categories_string.csv')['0'].to_dict()
+names = pd.read_csv('../data/categories_string.csv')['0'].to_dict()
 
-data=Import(fileName='./data/train',fileExtension='json').set_index('Id')
+data=Import(fileName='../data/train',fileExtension='json').set_index('Id')
+
 train_label=pd.read_csv('./data/train_label.csv',index_col='Id')
 
-data_test=Import(fileName='./data/test',fileExtension='json').set_index('Id')
+data_test=Import(fileName='../data/test',fileExtension='json').set_index('Id')
 
 
 #############################################################################
@@ -72,8 +73,7 @@ post1 = data.description[1]
 print(post1)
 
 
-    
-
+ 
 def wordFreq(doc):
     post = cleanText(deleteStopWords(doc))
     words = post.lower().split()
