@@ -7,8 +7,8 @@ Created on Wed Oct 21 18:50:13 2020
 #%% Importation
 
 import os
-from ManipData.txt_prep import macro_disparate_impact, prepareTxt
-from ManipData.IO_Kaggle import Import, HistoriqueCsv
+from ManipData.txt_prep import prepareTxtSpacy
+from ManipData.IO_Kaggle import Import, HistoriqueCsv, macro_disparate_impact
 
 import pandas as pd
 import re
@@ -32,12 +32,15 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import RandomForestClassifier
 
+#%% wandb
 import wandb
 from datetime import datetime
 jour = str(datetime.today())
 wandb.login(key=("8fc6b15f3fe940699f4c8a6a1f7e212afae58c6a"))
-wandb.init(name=jour, project="projetsd", config={"preparation":"prepareTxt", 
-                                       "transformation":"CountVectorizer(min_df = 100)",
+
+#%%
+wandb.init(name=jour, project="projetsd", config={"preparation":"prepareTxtSpacy", 
+                                       "transformation":"TfidfVectorizer()",
                                        "modele":'SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)',
                                        "Validation": 'Hold-out, test_size=0.3'})
 
@@ -56,7 +59,7 @@ trainDF= pd.concat([trainX, trainY], axis=1)
 
 #%% preparation
 
-trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
+trainDF['description'] = trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
 
 
 #%% modele
@@ -71,7 +74,7 @@ clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
 # clf = RandomForestClassifier(n_jobs=4)
 
 text_clf = Pipeline([
-    ('tfidf', TfidfVectorizer(min_df = 100)),
+    ('tfidf', TfidfVectorizer()),
     ('clf',clf),
 ])
 

@@ -9,7 +9,8 @@ Created on Fri Oct 23 11:23:51 2020
 #%% Importation
 
 import os
-from manipData import Import, HistoriqueCsv, macro_disparate_impact, prepareTxt, prepareTxtSpacy
+from ManipData.IO_Kaggle import Import, HistoriqueCsv, macro_disparate_impact 
+from ManipData.txt_prep import prepareTxt, prepareTxtSpacy
 import pandas as pd
 import re
 import nltk
