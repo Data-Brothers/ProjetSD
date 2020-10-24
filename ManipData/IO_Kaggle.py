@@ -163,10 +163,12 @@ def prepareTxt(text, flg_stemm=False, flg_lemm=True, lst_stopwords= set(stopword
     text = " ".join(lst_text)
     return text
 
-def prepareTxtSpacy(text):
-    doc = nlp(text.strip())
-    doc_lemma = " ".join([token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop])
-    return doc_lemma
+def prepareTxtSpacy(vectDescription):
+    texts = []
+    for doc in nlp.pipe(list(vectDescription)):
+        doc_lemma = " ".join(token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop)
+        texts.append(doc_lemma.strip())
+    return texts
 
 
 

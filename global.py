@@ -50,7 +50,7 @@ trainDF= pd.concat([trainX, trainY], axis=1)
 #trainDF['description']=trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
 
 # utilisation de la fonction prepareTxt
-trainDF['description']=trainDF.apply(lambda x:prepareTxtSpacy(x['description']),axis=1)
+trainDF['description'] = prepareTxtSpacy(trainDF['description'])
 
 #%% modele
 

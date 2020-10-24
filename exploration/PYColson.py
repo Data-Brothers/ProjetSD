@@ -70,27 +70,8 @@ resume.plot(kind='barh',y='femmes',x='label',color='r')
 
 post1 = data.description[1]
 print(post1)
-# post1 = deleteStopWords(post1)
-# print(post1)
-# post1 = cleanText(post1)
-# print(post1)
-
-# words = post1.lower().split()
 
 
-# stemmer = PorterStemmer()
-# wordStem = []
-# for word in words :
-#     wordStem.append(stemmer.stem(word))
-
-
-
-
-# dataset = []
-# doc = defaultdict(int)
-# for word in wordStem : 
-#     doc[word] +=1
-# dataset.append(doc)
     
 
 def wordFreq(doc):
@@ -113,25 +94,13 @@ print(wordFreq(data.description[1]))
 #dask.compute(*tasks)
 #data_train = DataFrame(list_df)
 
-%%time
-L = [wordFreq(data.description[i]) for i in range(5000)]
-train = DataFrame(L)
-
-%%time
-L = [dask.delayed(wordFreq)(data.description[i]) for i in range(5000)]
-L = dask.compute(L)[0]
-train = DataFrame(L)
 
 
 
 
-import spacy
-nlp = spacy.load("en_core_web_sm")
 
-def prepareTxtSpacy(text):
-    doc = nlp(text.strip())
-    doc_lemma = " ".join([token.lemma_.lower() for token in doc if token.lemma_ not in string.punctuation and not token.is_stop])
-    return doc_lemma
+
+
 
 
 
