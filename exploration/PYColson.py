@@ -40,12 +40,15 @@ from dask_ml.model_selection import train_test_split
 
 
 # Nom des jobs
-# names = pd.read_csv('./data/categories_string.csv')['0'].to_dict()
 
-# data=Import(fileName='./data/train',fileExtension='json').set_index('Id')
+# names = pd.read_csv('../data/categories_string.csv')['0'].to_dict()
+
+# data=Import(fileName='../data/train',fileExtension='json').set_index('Id')
+
 # train_label=pd.read_csv('./data/train_label.csv',index_col='Id')
 
-# data_test=Import(fileName='./data/test',fileExtension='json').set_index('Id')
+# data_test=Import(fileName='../data/test',fileExtension='json').set_index('Id')
+
 
 
 #############################################################################
@@ -112,7 +115,6 @@ trainDF['description'] = prepareTxtSpacy(trainDF['description'])
 
 # clf=GradientBoostingClassifier(n_estimators=10)
 
-
 #clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
 #clf = RandomForestClassifier(n_jobs=4)
 
@@ -153,6 +155,6 @@ test_people = pd.concat((y_pred, XValidSet.gender), axis='columns')
 fairness = macro_disparate_impact(test_people)
 print(f'Fairness = {fairness:.5}')
 
-scores = cross_val_score(lasso, X, y, cv=cv_outer)
+#scores = cross_val_score(lasso, X, y, cv=cv_outer)
 
 
