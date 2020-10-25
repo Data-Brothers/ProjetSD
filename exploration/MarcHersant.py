@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+# %%
 """
 Created on Wed Oct 21 18:50:13 2020
 
 @author: Marc
 """
-#%% Importation
+# %% Importation
 
 import os
 from ManipData.txt_prep import prepareTxtSpacy
@@ -32,20 +33,20 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-#%% wandb
+# %% wandb
 import wandb
 from datetime import datetime
 jour = str(datetime.today())
 wandb.login(key=("8fc6b15f3fe940699f4c8a6a1f7e212afae58c6a"))
 
-#%%
+# %%
 wandb.init(name=jour, project="projetsd", config={"preparation":"prepareTxtSpacy", 
                                        "transformation":"TfidfVectorizer()",
                                        "modele":'SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)',
                                        "Validation": 'Hold-out, test_size=0.3'})
 
 
-#%% importation données
+# %% importation données
 
 # Création du dico des `noms de métiers`
 jobNames = pd.read_csv('../data/categories_string.csv')['0'].to_dict()
@@ -57,12 +58,12 @@ trainY=pd.read_csv('../data/train_label.csv',index_col='Id')
 # Concatenation en un seul DataFrame pour visualiser
 trainDF= pd.concat([trainX, trainY], axis=1)
 
-#%% preparation
+# %% preparation
 
 trainDF['description'] = trainDF.apply(lambda x:prepareTxt(x['description']),axis=1)
 
 
-#%% modele
+# %% modele
 
 
 # clf=MultinomialNB()
@@ -80,7 +81,7 @@ text_clf = Pipeline([
 
 
 
-#%% séparetion train/test
+# %% séparetion train/test
 
 trainDF.rename(columns={'Category': 'Y'}, inplace=True)
 trainSet,validSet=train_test_split(trainDF,shuffle=True,test_size=0.3)
@@ -93,13 +94,13 @@ XValidSet= validSet.loc[:,validSet.columns!='Y']
 YTrainSet= trainSet['Y']
 YValidSet= validSet['Y']
 
-#%% entrainement
+# %% entrainement
 # Fitting our train data to the pipeline
 text_clf.fit(XTrainSet.description, YTrainSet)
 
 predicted = text_clf.predict(XValidSet.description)
 
-#%% score
+# %% score
 
 Macrof1 = f1_score(predicted,YValidSet,average='macro')
 #print(f'f1 score =  {Macrof1:.5}')
@@ -108,7 +109,7 @@ test_people = pd.concat((y_pred, XValidSet.gender), axis='columns')
 fairness = macro_disparate_impact(test_people)
 #print(f'Fairness = {fairness:.5}')
 wandb.log({"f1 score": Macrof1, "Fairness" : fairness})
-#%% Exportation
+# %% Exportation
 # HistoriqueCsv('Marc', 'prepareTxt, TfidfVectorizer()',
 #                 'RandomForest', 
 #                 'Hold-out, test_size=0.3', f'{Macrof1:.5}', '{fairness:.5}')

@@ -40,8 +40,8 @@ data_test=Import(fileName='../data/test',fileExtension='json').set_index('Id')
 
 
 #############################################################################
-#####                 Statistiques descriptives                         #####
-#############################################################################
+# ####                 Statistiques descriptives                         #####
+# ############################################################################
 
 
 description = pd.concat([train_label.Category, data.gender], axis = 1)
