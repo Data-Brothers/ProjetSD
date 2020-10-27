@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.append('../')
 from sklearn import model_selection
-
+os.getcwd()
 
 from sklearn import linear_model
 from sklearn import pipeline
@@ -20,7 +20,7 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import cross_val_score, train_test_split, GridSearchCV
 
 from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import SGDClassifier, LogisticRegression, LassoCV
@@ -96,6 +96,7 @@ jobNames = pd.read_csv('../data/categories_string.csv')['0'].to_dict()
 trainX=Import(fileName='../data/train',fileExtension='json').set_index('Id')
 
 trainY=pd.read_csv('../data/train_label.csv',index_col='Id')
+print("Importation des données OK")
 
 # Concatenation en un seul DataFrame pour visualiser
 trainDF= pd.concat([trainX, trainY], axis=1)
@@ -106,6 +107,8 @@ trainDF= pd.concat([trainX, trainY], axis=1)
 
 # utilisation de la fonction prepareTxt
 trainDF['description'] = prepareTxtSpacy(trainDF['description'])
+print("Nettoyage des données OK")
+trainDF.to_csv('trainDF.csv')
 
 #%% modele
 
@@ -118,8 +121,15 @@ trainDF['description'] = prepareTxtSpacy(trainDF['description'])
 #clf= SGDClassifier(loss="modified_huber", penalty="l2",early_stopping=True)
 #clf = RandomForestClassifier(n_jobs=4)
 
-cv_outer = KFold(len(trainDF), n_folds=5)
-clf = LassoCV(cv=3)  # cv=3 makes a KFold inner splitting with 3 folds
+#clf = LassoCV(cv=3)  # cv=3 makes a KFold inner splitting with 3 folds
+
+
+from sklearn import svm
+
+tuned_parameters = {'C':[1, 10, 100, 1000]}
+clf = GridSearchCV(
+        svm.SVC(), tuned_parameters, scoring='f1_macro'
+    )
 
 text_clf = Pipeline([
     ('tfidf', TfidfVectorizer()),
@@ -142,8 +152,10 @@ YValidSet= validSet['Y']
 
 #%% entrainement
 # Fitting our train data to the pipeline
+print("Début de l'entrainement des données")
 text_clf.fit(XTrainSet.description, YTrainSet)
 
+print("Début des prédictions")
 predicted = text_clf.predict(XValidSet.description)
 
 #%% score
@@ -154,7 +166,5 @@ y_pred = pd.Series(predicted , name='job', index=XValidSet.index)
 test_people = pd.concat((y_pred, XValidSet.gender), axis='columns')
 fairness = macro_disparate_impact(test_people)
 print(f'Fairness = {fairness:.5}')
-
-#scores = cross_val_score(lasso, X, y, cv=cv_outer)
 
 
