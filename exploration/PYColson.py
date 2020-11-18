@@ -108,7 +108,7 @@ trainDF= pd.concat([trainX, trainY], axis=1)
 # utilisation de la fonction prepareTxt
 trainDF['description'] = prepareTxtSpacy(trainDF['description'])
 print("Nettoyage des données OK")
-trainDF.to_csv('trainDF.csv')
+#trainDF.to_csv('trainDFSpacy.csv')
 
 #%% modele
 
@@ -126,15 +126,34 @@ trainDF.to_csv('trainDF.csv')
 
 from sklearn import svm
 
-tuned_parameters = {'C':[1, 10, 100, 1000]}
+tuned_parameters = {'C':[0.1, 1, 10, 100]}
 clf = GridSearchCV(
-        svm.SVC(), tuned_parameters, scoring='f1_macro'
+        svm.LinearSVC(), tuned_parameters, scoring='f1_macro'
     )
 
 text_clf = Pipeline([
-    ('tfidf', TfidfVectorizer()),
+    ('tfidf', TfidfVectorizer(ngram_range=(1, 3))),
     ('clf',clf),
 ])
+
+######################
+
+# from joblib import Memory
+# from shutil import rmtree
+# location='cachedir'
+# memory = Memory(cachedir=location, verbose=0)
+pipe = Pipeline([
+    ('tfidf', TfidfVectorizer(ngram_range=(1, 3))),
+    ('clf',svm.SVC(kernel='linear'))])
+
+# memory.clear(warn=False)
+# rmtree(location)
+
+tuned_parameters = {'clf__C':[1, 10, 100]}
+
+text_clf = GridSearchCV(pipe, param_grid=tuned_parameters, n_jobs=-1, scoring='f1_macro')
+
+######################
 
 #%% séparetion train/test
 
@@ -154,7 +173,8 @@ YValidSet= validSet['Y']
 # Fitting our train data to the pipeline
 print("Début de l'entrainement des données")
 text_clf.fit(XTrainSet.description, YTrainSet)
-
+# memory.clear(warn=False)
+# rmtree(location)
 print("Début des prédictions")
 predicted = text_clf.predict(XValidSet.description)
 
@@ -166,5 +186,7 @@ y_pred = pd.Series(predicted , name='job', index=XValidSet.index)
 test_people = pd.concat((y_pred, XValidSet.gender), axis='columns')
 fairness = macro_disparate_impact(test_people)
 print(f'Fairness = {fairness:.5}')
+
+
 
 
