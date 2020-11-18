@@ -52,8 +52,8 @@ from dask_ml.model_selection import train_test_split
 
 
 #############################################################################
-#####                 Statistiques descriptives                         #####
-#############################################################################
+# ####                 Statistiques descriptives                         #####
+# ############################################################################
 
 
 # description = pd.concat([train_label.Category, data.gender], axis = 1)
