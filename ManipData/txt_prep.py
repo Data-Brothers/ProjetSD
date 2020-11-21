@@ -96,7 +96,12 @@ def prepareTxtSpacy(vectDescription):
         texts.append(doc_lemma.strip())
     return texts
 
-
+def vectTxtSpacy(vectDescription):
+    texts = []
+    for doc in nlp.pipe(list(vectDescription)):
+        doc_vect = [token for token in doc if token.lemma_ not in string.punctuation]
+        texts.append(doc_vect)
+    return texts
 
 
 
