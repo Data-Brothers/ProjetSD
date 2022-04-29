@@ -19,5 +19,5 @@ def macro_disparate_impact(df_to_compute: pd.DataFrame) -> float:
     return counts["disparate_impact"].mean()
 
 
-def macro_f1(y_true, y_pred):
+def macro_f1(y_true, y_pred) -> float:
     return f1_score(y_true, y_pred, average="macro")

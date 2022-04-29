@@ -1,12 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 12 10:18:10 2020
-
-@author: PL - PYC - MH
-@version: 1
-@description: Fonctions de manipulation des données (Import/Export/SoumissionKaggle)
-"""
+"""Input/Ouput manipulation functions"""
 import csv
 import os
 import re
@@ -14,6 +6,7 @@ import string
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 
@@ -22,7 +15,7 @@ import pandas as pd
 class Inputfiles:
     """Class to store path to useful inputfiles"""
 
-    default: str
+    default: Path = Path("data")
     train_data: str
     categories: str
 
@@ -33,7 +26,7 @@ class Outputfiles:
 
     default: str
     train_data: str
-    categories: str
+    submission_file: Path=
 
 
 class IOHandler:
