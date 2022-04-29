@@ -2,39 +2,8 @@
 Projet de Science des Données - M2 MAS  
 Slides / Présentation : ![Lien Overleaf - LateX](https://www.overleaf.com/project/5f9199e2a19ef20001a08ce4)
 
-## Structure du Projet :
 
-```
-├── data `Dossier des fichiers`
-│   ├── categories_string.csv
-│   ├── template_submissions.csv
-│   ├── test.json
-│   ├── train.json
-│   └── train_label.csv
-├── exploration `Scripts & Notebook d'exploration`
-│   ├── Dask_MacroDI.ipynb (OK)
-│   ├── Dask_ML_TextPreprocessing.ipynb (OK)
-│   ├── Gender_words.ipynb (OK)
-│   ├── MarcHersant.py (OK)
-│   ├── multiclass-text-classification-with-spacy-dask.ipynb (HS)
-│   ├── PierreFinal.ipynb (HS)
-│   ├── PierreLep.py (HS)
-│   ├── Prof_reduction.ipynb (OK)
-│   └── PYColson.py (OK)
-├── global.py `fichier maître`
-├── Historique_resultats.csv
-├── __init__.py
-├── ManipData `Scripts de Manipulation des données`
-│   ├── __init__.py
-│   ├── IO_Kaggle.py `Input/Output & Soumission Kaggle`
-│   └── txt_prep.py `Preparation des chaînes de charactères`
-├── ProjetSdEnv.yml
-└── README.md
-```
-
-Tout les fichiers `(OK)` sont utilisables et stable (sans bugs) tout les fichiers `(HS)` sont non utilisables.
-
-_Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.com/questions/36321815/how-to-automatically-create-readme-md-markdown-of-directory-tree-listing?answertab=votes#tab-top)
+Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.com/questions/36321815/how-to-automatically-create-readme-md-markdown-of-directory-tree-listing?answertab=votes#tab-top)
 
 ---
 ## S'approprier le projet : 
