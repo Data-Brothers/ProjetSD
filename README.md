@@ -2,7 +2,6 @@
 Projet de Science des Données - M2 MAS  
 Slides / Présentation : ![Lien Overleaf - LateX](https://www.overleaf.com/project/5f9199e2a19ef20001a08ce4)
 
-Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.com/questions/36321815/how-to-automatically-create-readme-md-markdown-of-directory-tree-listing?answertab=votes#tab-top)
 
 ## To Do
 
@@ -31,14 +30,6 @@ Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.c
 2. `git add .`
 3. `git commit -m "Adding pkg"`
 4. `git push`
-
----
-## Etapes :
-
-* Visualisation des données brutes
-* Préparation de données
-* Création du modèle
-
 
 ---
 ## Idées : 
