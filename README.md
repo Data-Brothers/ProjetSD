@@ -10,6 +10,8 @@ Pour générer l'arboresence des fichiers:_ ![Aller ici](https://stackoverflow.c
 - [ ] Essayer les methodes suivantes :
 	- [ ] Zero-shot Learning
 	- [ ] Weak-supervision
+	- [ ] Tri-training and generating text with LLMs
+	
 ---
 ## S'approprier le projet : 
 ### Nouvelle Utilisation :
